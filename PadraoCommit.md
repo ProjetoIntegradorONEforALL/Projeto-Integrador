@@ -7,7 +7,7 @@
 
 **Estrutura padrão:**  
 ```
-git commit -m ":emoji: tag: [descrição da ação do commit em inglês no infinitivo, como se estivesse descrevendo a intenção do commit]"
+git commit -m "tag: [descrição da ação do commit em inglês no infinitivo, como se estivesse descrevendo a intenção do commit]"
 ```
 
 ---
