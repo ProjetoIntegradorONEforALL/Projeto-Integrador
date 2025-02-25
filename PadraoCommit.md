@@ -24,10 +24,10 @@ git commit -m "feat: add new class Product"
 
 **Resultado Esperado no Histórico:**  
 ```
-🎉 init: start project
+init: start project
 ```
 ```
-✨ feat: add new class Product
+feat: add new class Product
 ```
 
 ---
