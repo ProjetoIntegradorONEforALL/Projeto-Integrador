@@ -14,10 +14,10 @@ git commit -m ":emoji: tag: [descrição da ação do commit em inglês no infin
 
 **Exemplos:**  
 ```
-git commit -m ":tada: init: start project"
+git commit -m "init: start project"
 ```
 ```
-git commit -m ":sparkles: feat: add new class Product"
+git commit -m "feat: add new class Product"
 ```
 
 ---
