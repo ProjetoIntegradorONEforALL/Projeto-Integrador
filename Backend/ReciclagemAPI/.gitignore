@@ -1,58 +1,51 @@
-# Binários compilados
+# Compilação
 bin/
 obj/
 
-# Configuração do usuário e logs
-.vscode/
+# Configurações do usuário
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
+
+# Logs e resultados
 *.log
-
-# Configurações específicas de IDEs
-*.csproj.user
-*.dbmdl
-*.pdb
-*.pidb
-*.opendb
-
-# Pacotes e dependências externas
-packages/
-node_modules/
-
-# Arquivos temporários
-*.tmp
-*.cache
-*.bak
-*.swp
-*.sln.ide
-
-# Publicações
-wwwroot/dist/
-wwwroot/node_modules/
-wwwroot/lib/
-
-# Arquivos gerados pelo Visual Studio
-.vs/
-.idea/
-*.psess
-
-# Arquivos de depuração e de build
-*.ilk
-*.map
-*.obj
-*.pdb
-*.idb
 *.tlog
-*.log
 *.cache
-*.csproj.nuget.g.props
-*.csproj.nuget.g.targets
 
-# Diretórios de migração do Entity Framework
-Migrations/
+# Configurações do Visual Studio
+.vscode/
+*.vs/
 
-# Arquivos de ambiente
+# Dependências do NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Arquivos de lock
+project.lock.json
+
+# Configurações de publicação e build
+publish/
+artifacts/
+
+# Arquivos do Rider e JetBrains
+.idea/
+*.iml
+
+# Certificados de desenvolvimento
+*.pfx
+*.p12
+
+# Docker
+**/[Dd]ockerfile
+**/[Dd]ocker-compose*
+
+# Ambiente local
 .env
 secrets.json
+
+# Arquivos gerados pelo dotnet
+*.db
+*.sqlite
+*.bak
