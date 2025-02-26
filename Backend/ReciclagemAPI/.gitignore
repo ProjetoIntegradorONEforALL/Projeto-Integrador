@@ -1,0 +1,58 @@
+# Binários compilados
+bin/
+obj/
+
+# Configuração do usuário e logs
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.log
+
+# Configurações específicas de IDEs
+*.csproj.user
+*.dbmdl
+*.pdb
+*.pidb
+*.opendb
+
+# Pacotes e dependências externas
+packages/
+node_modules/
+
+# Arquivos temporários
+*.tmp
+*.cache
+*.bak
+*.swp
+*.sln.ide
+
+# Publicações
+wwwroot/dist/
+wwwroot/node_modules/
+wwwroot/lib/
+
+# Arquivos gerados pelo Visual Studio
+.vs/
+.idea/
+*.psess
+
+# Arquivos de depuração e de build
+*.ilk
+*.map
+*.obj
+*.pdb
+*.idb
+*.tlog
+*.log
+*.cache
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+
+# Diretórios de migração do Entity Framework
+Migrations/
+
+# Arquivos de ambiente
+.env
+secrets.json
