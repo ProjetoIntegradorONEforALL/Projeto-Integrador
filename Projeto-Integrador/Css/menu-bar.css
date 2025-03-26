@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Janela Lateral */
+nav.menu-lateral {
+    width: 80px;
+    height: 100%;
+    background-color: #6A7788;
+    padding: 40px 0 40px 1%;
+    box-shadow: 2px 0 0 #606b7a;
+
+    position: fixed;
+    top:  0;
+    left: 0;
+    overflow: hidden;
+    transition: .4s;
+}
+
+nav.menu-lateral.expandir {
+    width: 18%;
+}
+
+/* Botão Expandir*/
+.btn-expandir {
+    width: 100%;
+    margin-left: 10px;
+}
+
+/* Icon do Botão de Expandir*/
+.btn-expandir > i {
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Lista */
+ul {
+    height: 100%;
+    list-style-type: none;
+}
+
+ul li.item-menu:hover {
+    background: #5d6877;
+}
+
+/* Item dentro da Lista */
+ul li.item-menu {
+    display: flex;
+    flex-direction: column; /* Permite que o details e o conteúdo abaixo fiquem um embaixo do outro */
+    padding: 12px 4%;
+    cursor: pointer;
+    border-bottom: 1px solid #5d6877;
+    transition: 0.4s;
+}
+
+/* Ícones */
+ul li.item-menu .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+}
+
+ul li.item-menu .icon i {
+    font-size: 25px;
+    color: white;
+}
+
+/* Ajustando o details para aparecer embaixo do summary */
+ul li.item-menu details {
+    width: 100%;
+    padding-left: 7px; /* Espaço para alinhar com o texto */
+}
+
+
+/* Estilizando o summary para parecer um link */
+ul li.item-menu summary {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    padding: 12px 0;
+    list-style: none;
+    cursor: pointer;
+}
+
+/* Ajusta o espaçamento do texto "Gráficos" antes da expansão */
+ul li.item-menu details summary .txt-link {
+    margin-left: 70px; /* Ajuste conforme necessário */
+    transition: .7s;
+    opacity: 0;
+}
+
+ul li.item-menu.expandir details summary .txt-link {
+    margin-left: 20px;
+    opacity: 1;
+}
+
+/* Garante que os ícones fiquem alinhados */
+ul li.item-menu details summary {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    padding: 12px 0;
+    list-style: none;
+    cursor: pointer;
+}
+
+/* Ícone de seta dentro do summary */
+ul li.item-menu summary::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 18px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Removendo o marcador padrão do details */
+ul li.item-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/* Links dentro do details, que ficam abaixo do summary quando expandido */
+ul li.item-menu details a {
+    display: block;
+    padding: 10px 40px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 18px;
+    background: #5d6877;
+    border-left: 3px solid transparent;
+    transition: 0.3s;
+    margin-left: 40px;
+}
+
+/* Estilo ao passar o mouse sobre os links dentro do details */
+ul li.item-menu details a:hover {
+    background: #3a3a50;
+    color: white;
+    border-left: 3px solid #ffffff;
+    margin-left: 10px;
+}
+
+/* Link */
+ul li.item-menu a {
+    color: #fff; 
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 4%;
+    display: flex;  
+    line-height: 40px;
+} 
+
+/* Texto dos icons */
+ul li.item-menu a .txt-link {
+    margin-left: 70px;
+    transition: .7s;
+    opacity: 0;
+}
+
+nav.menu-lateral.expandir .txt-link {
+    margin-left: 30px;
+    opacity: 1;
+}
+
+/* Icons */
+ul li.item-menu a .icon > i {
+    font-size: 30px;
+    margin-left: 3px;
+}
+
+ul li.item-menu a :nth-child(3n) {
+    margin-top: 20px;
+}
+
+.summary {
+    list-style-type: none;
+}
+
+ul li.item-menu details summary .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* Define um tamanho fixo para alinhar com os outros ícones */
+    margin-right: 5px; /* Pequeno espaçamento entre o ícone e o texto */
+}
+
+/* Antes de expandir: ícone do gráfico alinhado com os outros */
+ul li.item-menu details summary .icon i {
+    font-size: 30px; /* Mesmo tamanho dos outros ícones */
+    margin-left: 1px; /* Mantém alinhado com os demais */
+}
+
+
+/* Quando o menu expande, ajusta a posição do texto */
+nav.menu-lateral.expandir ul li.item-menu details summary .txt-link {
+    margin-left: 25px;
+    opacity: 1;
+}
+
+/* ======================================== */
+/* ======================================== */
+/* ======================================== */
+/* ======================================== */
+/* ======================================== */
+/* Estilo da Home */
+.cabecalho {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom:  300px;
+    width: 100%;
+}
+
+.busca {
+    background-color: #FCFCFC;
+    border: solid #c0c0c0;
+    border-radius: 15px;
+    width: 300px;
+    height: 70px;
+    line-height: 65px;
+    margin-left: 180px;
+}
+
+#text-busca {
+    background-color:transparent;
+    padding-left:5px;
+    padding-bottom: 2px;
+    font-style:italic;
+    font-size:18px;
+    border:none;
+    height:30px;
+    width:260px;
+}
+
+.busca > i {
+    font-size: 20px;
+}
+
+.user {
+    background-color: #fff;
+    border: solid #6A7788;
+    display: flex;
+    border-radius: 10px;
+    max-width: 200px;
+    height: 70px;
+    margin-left: 30px;
+}
+
+.user img {
+    width: 37%;
+    border-right: solid #6A7788;
+}
+
+.user-info {
+    justify-content: center;
+    flex-direction: row;
+}
+
+.sininho {
+    font-size: 40px;
+    margin-left: 630px;
+}
+
+/*===================================*/
+/*===================================*/
+/*===================================*/
+/*===================================*/
+/* Parte dos Graficos */
