@@ -1,0 +1,6 @@
+@ReciclagemAPI_HostAddress = http://localhost:5188
+
+GET {{ReciclagemAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

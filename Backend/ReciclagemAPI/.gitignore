@@ -1,0 +1,51 @@
+# Compilação
+bin/
+obj/
+
+# Configurações do usuário
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs e resultados
+*.log
+*.tlog
+*.cache
+
+# Configurações do Visual Studio
+.vscode/
+*.vs/
+
+# Dependências do NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Arquivos de lock
+project.lock.json
+
+# Configurações de publicação e build
+publish/
+artifacts/
+
+# Arquivos do Rider e JetBrains
+.idea/
+*.iml
+
+# Certificados de desenvolvimento
+*.pfx
+*.p12
+
+# Docker
+**/[Dd]ockerfile
+**/[Dd]ocker-compose*
+
+# Ambiente local
+.env
+secrets.json
+
+# Arquivos gerados pelo dotnet
+*.db
+*.sqlite
+*.bak
