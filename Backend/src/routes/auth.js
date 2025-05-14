@@ -4,13 +4,12 @@ const jwt = require('jsonwebtoken');
 
 // Login endpoint
 router.post('/login', async (req, res) => {
-  console.log('Endpoint /login acessado');
   try {
-    console.log(req.body);
     const { username, password } = req.body;
 
     // TODO: Implement proper user authentication
     // This is a placeholder for demonstration
+    
     if (username !== 'admin' || password !== 'admin123') {
       return res.status(401).json({
         status: 'error',
