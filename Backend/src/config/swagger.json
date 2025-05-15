@@ -30,6 +30,7 @@
       "post": {
         "tags": ["Authentication"],
         "summary": "Login to get JWT token",
+        "security": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -43,14 +44,32 @@
                   "password": {
                     "type": "string"
                   }
-                }
+                },
+                "required": ["username", "password"]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Login successful"
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
             "description": "Invalid credentials"
@@ -63,15 +82,9 @@
         "tags": ["Authentication"],
         "summary": "Verify JWT token",
         "description": "Validates the provided JWT token and returns the decoded user information if valid.",
-        "parameters": [
+        "security": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Bearer token (e.g., 'Bearer <your_token>')"
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -144,6 +157,11 @@
       "get": {
         "tags": ["Sensors"],
         "summary": "List all sensors",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "List of sensors"
@@ -155,6 +173,11 @@
       "get": {
         "tags": ["Sensors"],
         "summary": "Get sensor historical data",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -192,6 +215,11 @@
       "get": {
         "tags": ["Actuators"],
         "summary": "List all actuators",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "List of actuators"
@@ -203,6 +231,11 @@
       "post": {
         "tags": ["Actuators"],
         "summary": "Control an actuator",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -227,7 +260,8 @@
                   "value": {
                     "type": "number"
                   }
-                }
+                },
+                "required": ["action"]
               }
             }
           }
