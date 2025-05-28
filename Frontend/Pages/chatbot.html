@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChatBot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .sidebar {
+      min-height: 100vh;
+      background-color: #f1f3f5;
+    }
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 sidebar p-3">
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" style="color: black;" href="#">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" style="color: black;" href="#">Monitoramento</a></li>
+        <li class="nav-item"><a class="nav-link" style="color: black;" href="/Frontend/Pages/chatbot.html">ChatBot</a></li>
+        <li class="nav-item"><a class="nav-link" style="color: black;" href="#">Sair</a></li>
+      </ul>
+    </div>
+
+    <div class="col-md-10 p-4">
+      <h2>Chat Bot</h2>
+    <div class="form-control">
+        <h5>Como posso ajudar?</h5>
+    </div>
+      <div style="position: fixed; bottom: 0; left: 16.666%; width: 83.333%;" class="p-3 border-top">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Pergunte alguma coisa" aria-label="Search"/>
+            <button class="btn btn-outline-success" type="submit">^</button>
+        </form>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
