@@ -1,38 +1,28 @@
-CREATE TABLE erros (
+CREATE TABLE pecas (
     id SERIAL PRIMARY KEY,
-    processos_id INTEGER REFERENCES processos(id),
-    materiais_id INTEGER REFERENCES materiais(id),
-    quantidade INTEGER NOT NULL,
     tipo VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE materiais (
+CREATE TABLE erros (
     id SERIAL PRIMARY KEY,
-    nome VARCHAR(150) NOT NULL,
-    tipo VARCHAR(30) NOT NULL
+    quantidade_erros INTEGER NOT NULL,
+    tipo_erro VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE processos (
     id SERIAL PRIMARY KEY,
-    processos_id INTEGER REFERENCES processos(id),
-    data_processo DATE NOT NULL,
-    preco NUMERIC(10, 2) NOT NULL,
-    quantidade INTEGER NOT NULL
-)
+    peca_id INTEGER REFERENCES pecas(id),
+    inicio_processo DATE NOT NULL,
+    fim_processo DATE,
+    quantidade_processo INTEGER,
+    data_hora TIMESTAMP NOT NULL,
+    tempo_medio TIME
+);
 
-CREATE TABLE sensores (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL,
-    tipo VARCHAR(30) NOT NULL
-)
+CREATE TABLE processo_erro (
+    processo_id INTEGER REFERENCES processos(id),
+    erros_id INTEGER REFERENCES erros(id),
+    hora_data_erro TIMESTAMP,
+    PRIMARY KEY (processo_id, erros_id)
+);
 
-CREATE TABLE densempenho (
-    id SERIAL PRIMARY KEY,
-    processos_id INTEGER REFERENCES processos(id),
-    volume NUMERIC NOT NULL,
-    Inatividade BOOLEAN NOT NULL DEFAULT TRUE,
-    horas_trabalhadas NUMERIC NOT NULL,
-    homem_horas NUMERIC NOT NULL,
-    eficiencia NUMERIC NOT NULL,
-    produtividade NUMERIC NOT NULL
-)
