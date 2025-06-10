@@ -9,18 +9,20 @@
 <body>
   <div class="login-container">
     <div class="login-title">Login EcoVision</div>
-    <form action="home.html">
+    <form id="loginForm">
       <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Usuário" required>
+        <input type="text" id="username" class="form-control" placeholder="Usuário" required>
       </div>
       <div class="mb-3">
-        <input type="password" class="form-control" placeholder="Senha" required>
+        <input type="password" id="password" class="form-control" placeholder="Senha" required>
       </div>
       <button type="submit" class="btn btn-login w-100">Entrar</button>
     </form>
+    <div id="errorMsg" class="text-danger mt-2"></div>
     <div class="back-link">
       <a href="cadastro.html">Criar conta</a>
     </div>
   </div>
+  <script src="/Frontend/Js/login.js"></script>
 </body>
 </html>
