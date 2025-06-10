@@ -1,0 +1,186 @@
+  :root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --accent: #3c91e6;
+  --danger: #db504a;
+  --success: #4caf50;
+  --warn: #ffce26;
+  --font: 'Poppins', sans-serif;
+  --sidebar-body: #a9a9a9; /* novo: cor cinza da área de itens */
+  --sidebar-header: #ffffff; /* novo: cor branca do topo */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font);
+}
+
+body {
+  background: var(--bg);
+  display: flex;
+}
+
+/* Sidebar geral */
+#sidebar {
+  background-color: #b0b0b0;
+  width: 220px;
+  min-height: 100vh;
+  padding: 1rem;
+  position: relative;
+  transition: width 0.3s ease;
+}
+
+#sidebar.collapsed {
+  width: 60px;
+}
+
+#sidebar .brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4b4b4b;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.side-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu li {
+  margin-bottom: 1rem;
+}
+
+.side-menu a {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  background-color: white;
+  color: #4b4b4b;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.side-menu a:hover {
+  background-color: #dcdcdc;
+}
+
+.side-menu i {
+  font-size: 1.3rem;
+  margin-right: 10px;
+}
+
+/* Ocultar texto ao colapsar */
+#sidebar.collapsed .text {
+  display: none;
+}
+
+/* Toggle Button */
+#toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#sidebar.collapsed #toggle-btn i {
+  transform: rotate(180deg);
+}
+
+/* Conteúdo principal */
+/* Centraliza o conteúdo principal */
+#content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Cards de status em linha e centralizados */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+/* Estilização dos cards */
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Gráficos lado a lado e centralizados */
+.charts {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Caixa individual de cada gráfico */
+.chart-box {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  width: 360px;
+}
+    
+    canvas{max-width:100%}
+
+    .logout-btn {
+  background-color: #dc3545; /* vermelho bootstrap */
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.logout-btn:hover {
+  background-color: #bb2d3b; /* vermelho escuro ao passar o mouse */
+  color: white;
+}
+
+/* Toggle botão */
+#toggle-btn {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 5px;
+  position: absolute;
+  top: 15px;
+  right: -15px;
+  cursor: pointer;
+}
+
+#sidebar.collapsed #toggle-btn i {
+  transform: rotate(180deg);
+}
+
+#sidebar.collapsed .brand {
+  display: none;
+}

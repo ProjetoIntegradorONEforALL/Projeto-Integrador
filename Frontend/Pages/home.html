@@ -1,11 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ecovision</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-success bg-success navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Ecovision</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#telas">Telas</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tecnologias">Tecnologias</a></li>
+        <li class="nav-item"><a class="nav-link" href="#repositorios">Repositórios</a></li>
+        <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="chatbot.html">ChatBot</a></li>
+        <li class="nav-item"><a class="nav-link" href="Login.html">Sair</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="bg-primary text-white text-center py-5">
+  <div class="container">
+    <h1 class="display-4">Bem-vindo à Ecovision</h1>
+    <p class="lead">Soluções sustentáveis para um futuro melhor</p>
+  </div>
+</section>
+
+<!-- Membros - Carrossel -->
+<section id="membros" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Membros do Projeto</h2>
+    <div id="carouselMembros" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner text-center">
+        <div class="carousel-item active">
+          <h5>Gustavo Silveira</h5>
+          <p>Frontend</p>
+        </div>
+        <div class="carousel-item">
+          <h5>Gustavo Senna</h5>
+          <p>Backend</p>
+        </div>
+        <div class="carousel-item">
+          <h5>Julia Paes</h5>
+          <p>Automação Industrial</p>
+        </div>
+        <div class="carousel-item">
+          <h5>David</h5>
+          <p>Nuvem</p>
+        </div>
+        <div class="carousel-item">
+          <h5>José Henrique</h5>
+          <p>Nuvem e Automação Industrial</p>
+        </div>
+        <div class="carousel-item">
+          <h5>Rafael</h5>
+          <p>API</p>
+        </div>
+        <div class="carousel-item">
+          <h5>Gabriel Eliezer</h5>
+          <p>API</p>
+        </div>
+        <div class="carousel-item">
+          <h5>Pablo</h5>
+          <p>Mobile</p>
+        </div>
+        <div class="carousel-item">
+          <h5>Millena</h5>
+          <p>Figma e Mobile</p>
+        </div>
+        <div class="carousel-item">
+          <h5>Melina</h5>
+          <p>Figma e Mobile</p>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselMembros" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-circle"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselMembros" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-dark rounded-circle"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Objetivos -->
+<section id="objetivos" class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Objetivos</h2>
+    <p class="text-center">
+      A Ecovision tem como missão transformar a gestão de resíduos orgânicos, promovendo sustentabilidade e inovação tecnológica em ambientes urbanos.
+    </p>
+  </div>
+</section>
+
+<!-- Telas -->
+<section id="telas" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Telas do Sistema</h2>
+    <div class="row text-center g-4">
+      <div class="col-md-4">
+        <img src="/Frontend/images/login.png" class="img-fluid rounded mb-2" alt="Login">
+        <p>Tela de Login</p>
+      </div>
+      <div class="col-md-4">
+        <img src="/Frontend/images/dashboard.png" class="img-fluid rounded mb-2" alt="Dashboard">
+        <p>Dashboard</p>
+      </div>
+      <div class="col-md-4">
+        <img src="/Frontend/images/monitoramento.png" class="img-fluid rounded mb-2" alt="Monitoramento">
+        <p>Monitoramento</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tecnologias -->
+<section id="tecnologias" class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">Tecnologias Usadas</h2>
+    <div class="row justify-content-center text-center">
+      <div class="col-4 col-md-2">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="img-fluid" style="height: 60px;" alt="HTML5">
+        <p>HTML5</p>
+      </div>
+      <div class="col-4 col-md-2">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="img-fluid" style="height: 60px;" alt="CSS3">
+        <p>CSS3</p>
+      </div>
+      <div class="col-4 col-md-2">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="img-fluid" style="height: 60px;" alt="JavaScript">
+        <p>JavaScript</p>
+      </div>
+      <div class="col-4 col-md-2">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="img-fluid" style="height: 60px;" alt="python">
+        <p>Python</p>
+      </div>
+      <div class="col-4 col-md-2">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" class="img-fluid" style="height: 60px;" alt="Bootstrap">
+        <p>Bootstrap</p>
+      </div>
+      <div class="col-4 col-md-2">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" class="img-fluid" style="height: 60px;" alt="Figma">
+        <p>Figma</p>
+      </div>
+      <div class="col-4 col-md-2">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" class="img-fluid" style="height: 60px;" alt="Jquery">
+        <p>Jquery</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Repositórios -->
+<section id="repositorios" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Repositórios</h2>
+    <ul class="list-group">
+      <li class="list-group-item"><a href="https://github.com/ProjetoIntegradorONEforALL/Projeto-Integrador/tree/develop/Frontend" target="_blank">Frontend</a></li>
+      <li class="list-group-item"><a href="https://github.com/ProjetoIntegradorONEforALL/Projeto-Integrador/tree/develop/Backend" target="_blank">Backend</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+  <div class="container">
+    <small>&copy; 2025 Ecovision. Todos os direitos reservados.</small>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

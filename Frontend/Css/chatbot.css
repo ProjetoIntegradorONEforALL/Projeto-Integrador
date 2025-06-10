@@ -1,0 +1,70 @@
+ body {
+      background-color: #f8f9fa;
+    }
+
+    .sidebar {
+      background-color: #a0a0a0;
+      color: white;
+      min-height: 100vh;
+      padding: 1rem;
+      transition: width 0.3s;
+    }
+
+    .sidebar.collapsed {
+      width: 60px !important;
+    }
+
+    .sidebar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #0d6efd;
+    }
+
+    .sidebar-btn {
+      color: black;
+      font-weight: 500;
+      width: 100%;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .sidebar-btn:hover {
+      background-color: #ced4da;
+    }
+
+    .sidebar-toggle {
+      position: absolute;
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+
+    .sidebar.collapsed .btn-text {
+      display: none;
+    }
+
+    .sidebar.collapsed .icon-only {
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    @media (max-width: 767.98px) {
+      .chat-footer {
+        position: static;
+        width: 100%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .chat-footer {
+        position: fixed;
+        bottom: 0;
+        left: 16.666%;
+        width: 83.333%;
+        background-color: white;
+        z-index: 1;
+      }
+    }
