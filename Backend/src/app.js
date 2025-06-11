@@ -1,5 +1,8 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 
 // Middlewares básicos
 app.use(express.json());
@@ -14,5 +17,7 @@ app.use('/api/v1/person', personRoutes);
 app.use('/api/v1/actuators', actuatorsRouter);
 app.use('/api/v1/sensors', sensorsRouter);
 app.use('/api/v1/auth', authRouter);
+
+app.use('/api/v1/auth/login', authRouter);
 
 module.exports = app;
