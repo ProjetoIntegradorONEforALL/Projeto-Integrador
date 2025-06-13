@@ -1,15 +1,3 @@
-  :root {
-  --bg: #f4f6f9;
-  --card: #ffffff;
-  --accent: #3c91e6;
-  --danger: #db504a;
-  --success: #4caf50;
-  --warn: #ffce26;
-  --font: 'Poppins', sans-serif;
-  --sidebar-body: #a9a9a9; /* novo: cor cinza da área de itens */
-  --sidebar-header: #ffffff; /* novo: cor branca do topo */
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +13,7 @@ body {
 /* Sidebar geral */
 #sidebar {
   background-color: #b0b0b0;
-  width: 220px;
+  width: 250px;
   min-height: 100vh;
   padding: 1rem;
   position: relative;
@@ -33,13 +21,13 @@ body {
 }
 
 #sidebar.collapsed {
-  width: 60px;
+  width: 75px;
 }
 
 #sidebar .brand {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: #4b4b4b;
+  color: #333;
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -97,6 +85,10 @@ body {
   transform: rotate(180deg);
 }
 
+#sidebar.collapsed .brand {
+  display: none;
+}
+
 /* Conteúdo principal */
 /* Centraliza o conteúdo principal */
 #content {
@@ -145,9 +137,9 @@ body {
   width: 360px;
 }
     
-    canvas{max-width:100%}
+canvas{max-width:100%}
 
-    .logout-btn {
+.logout-btn {
   background-color: #dc3545; /* vermelho bootstrap */
   color: white;
   padding: 10px 16px;
@@ -165,22 +157,3 @@ body {
   color: white;
 }
 
-/* Toggle botão */
-#toggle-btn {
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  padding: 5px;
-  position: absolute;
-  top: 15px;
-  right: -15px;
-  cursor: pointer;
-}
-
-#sidebar.collapsed #toggle-btn i {
-  transform: rotate(180deg);
-}
-
-#sidebar.collapsed .brand {
-  display: none;
-}

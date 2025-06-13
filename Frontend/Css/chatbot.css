@@ -1,70 +1,161 @@
  body {
       background-color: #f8f9fa;
-    }
+}
 
-    .sidebar {
-      background-color: #a0a0a0;
-      color: white;
-      min-height: 100vh;
-      padding: 1rem;
-      transition: width 0.3s;
-    }
-
-    .sidebar.collapsed {
-      width: 60px !important;
-    }
-
-    .sidebar .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #0d6efd;
-    }
-
-    .sidebar-btn {
-      color: black;
-      font-weight: 500;
-      width: 100%;
-      text-align: left;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
-    .sidebar-btn:hover {
-      background-color: #ced4da;
-    }
-
-    .sidebar-toggle {
-      position: absolute;
-      bottom: 1rem;
-      left: 0;
-      right: 0;
-      text-align: center;
-    }
-
-    .sidebar.collapsed .btn-text {
-      display: none;
-    }
-
-    .sidebar.collapsed .icon-only {
-      text-align: center;
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    @media (max-width: 767.98px) {
+    @media (max-width: 100%) {
       .chat-footer {
         position: static;
         width: 100%;
       }
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 100vh) {
       .chat-footer {
         position: fixed;
         bottom: 0;
-        left: 16.666%;
-        width: 83.333%;
+        width: 85%;
         background-color: white;
         z-index: 1;
       }
     }
+
+/* Layout base */
+.wrapper {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#sidebar {
+  background-color: #b0b0b0;
+  width: 250px;
+  min-height: 100vh;
+  padding: 1rem;
+  position: relative;
+  transition: width 0.3s ease;
+}
+
+#sidebar.collapsed {
+  width: 75px;
+}
+
+#sidebar .brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.side-menu {
+  list-style: none;
+  padding: 0;
+  flex-grow: 1;
+}
+
+.side-menu li {
+  margin-bottom: 1rem;
+}
+
+.side-menu a {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  background-color: white;
+  color: #4b4b4b;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.side-menu a:hover {
+  background-color: #e0e0e0;
+}
+
+.side-menu i {
+  font-size: 1.3rem;
+  margin-right: 10px;
+}
+
+#sidebar.collapsed .text {
+  display: none;
+}
+
+/* Toggle botão */
+#toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#sidebar.collapsed #toggle-btn i {
+  transform: rotate(180deg);
+}
+
+#sidebar.collapsed .brand {
+  display: none;
+}
+
+/* Conteúdo principal */
+main.content {
+  flex-grow: 1;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  overflow-y: auto;
+}
+
+.chart-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.chart-box {
+  flex: 1 1 30%;
+  min-width: 300px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.info-cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px;
+}
+
+.info-card {
+  flex: 1 1 30%;
+  min-width: 200px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.info-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.info-card p {
+  font-size: 1.5rem;
+  color: #00796b;
+  font-weight: bold;
+}
