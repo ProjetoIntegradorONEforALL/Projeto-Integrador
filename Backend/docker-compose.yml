@@ -1,0 +1,42 @@
+version: '3.8' # Versão da sintaxe do Docker Compose
+
+services:
+  # Serviço para o PostgreSQL
+  db:
+    image: postgres:latest # Usa a última versão da imagem oficial do PostgreSQL
+    container_name: postgres_db_container # Nome do contêiner para fácil referência
+    restart: always # O contêiner sempre reinicia se parar
+    environment:
+      POSTGRES_DB: myappdb # Nome do banco de dados inicial a ser criado (opcional)
+      POSTGRES_USER: myuser # Usuário do banco de dados (mude para algo diferente de 'postgres'!)
+      POSTGRES_PASSWORD: mysecretpassword # Senha do usuário (MUDE PARA UMA SENHA FORTE E ÚNICA!)
+    ports:
+      - "5432:5432" # Mapeia a porta 5432 do host para a porta 5432 do contêiner
+    volumes:
+      - pgdata:/var/lib/postgresql/data # Persistência de dados para o PostgreSQL
+    networks:
+      - app_network # Conecta o DB à rede interna da aplicação
+
+  # Serviço para o pgAdmin
+  pgadmin:
+    image: dpage/pgadmin4 # Imagem oficial do pgAdmin 4
+    container_name: pgadmin_container # Nome do contêiner para fácil referência
+    restart: always # O contêiner sempre reinicia se parar
+    environment:
+      PGADMIN_DEFAULT_EMAIL: g.eliezer.rodrigues@gmail.com # Email de login do pgAdmin (MUDE!)
+      PGADMIN_DEFAULT_PASSWORD: postgreesqlpass # Senha de login do pgAdmin (MUDE PARA OUTRA SENHA FORTE E ÚNICA!)
+    ports:
+      - "8081:80" # Mapeia a porta 8080 do host para a porta 80 do contêiner (pgAdmin web)
+    networks:
+      - app_network # Conecta o pgAdmin à rede interna da aplicação
+    depends_on:
+      - db # Garante que o serviço 'db' inicie antes do 'pgadmin'
+
+# Volumes para persistência de dados
+volumes:
+  pgdata: # Este volume persistirá os dados do PostgreSQL
+
+# Redes
+networks:
+  app_network: # Define uma rede interna para os contêineres se comunicarem
+    driver: bridge
