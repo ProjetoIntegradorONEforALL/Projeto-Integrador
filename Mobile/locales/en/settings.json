@@ -1,0 +1,10 @@
+{
+  "settings": "Settings",
+  "edit_profile": "Edit Profile",
+  "notifications": "Notifications",
+  "language": "Language",
+  "about": "About App",
+  "logout": "Logout",
+  "logout_success": "You have successfully logged out.",
+  "version": "Version 1.0 - Developed by Melina, Millena and Pablo"
+}
