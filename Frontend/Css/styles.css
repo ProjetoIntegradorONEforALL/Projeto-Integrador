@@ -5,13 +5,17 @@
   overflow: hidden;
 }
 
+/* Sidebar geral */
 #sidebar {
-  background-color: #b0b0b0;
-  width: 250px;
+  background-color: #2c3e50;
+  width: 240px;
   min-height: 100vh;
   padding: 1rem;
   position: relative;
   transition: width 0.3s ease;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 #sidebar.collapsed {
@@ -21,7 +25,7 @@
 #sidebar .brand {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #333;
+  color: #ecf0f1;
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -29,7 +33,7 @@
 .side-menu {
   list-style: none;
   padding: 0;
-  flex-grow: 1;
+  margin: 0;
 }
 
 .side-menu li {
@@ -42,14 +46,15 @@
   padding: 10px 12px;
   border-radius: 8px;
   text-decoration: none;
-  background-color: white;
-  color: #4b4b4b;
+  background-color: #34495e;
+  color: #ecf0f1;
   font-weight: 500;
   transition: background 0.2s, color 0.2s;
 }
 
 .side-menu a:hover {
-  background-color: #e0e0e0;
+  background-color: #3e5e75;
+  color: #ffffff;
 }
 
 .side-menu i {
@@ -57,10 +62,14 @@
   margin-right: 10px;
 }
 
+/* Ocultar texto ao colapsar */
 #sidebar.collapsed .text {
   display: none;
 }
 
+#sidebar.collapsed .brand {
+  display: none;
+}
 /* Toggle botão */
 #toggle-btn {
   position: absolute;
@@ -138,4 +147,24 @@ main.content {
   font-size: 1.5rem;
   color: #00796b;
   font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 60px;
+    padding: 10px 5px;
+  }
+
+  #sidebar .text {
+    display: none;
+  }
+
+  #sidebar .brand {
+    display: none;
+  }
+
+  main.content {
+    padding: 10px;
+  }
 }

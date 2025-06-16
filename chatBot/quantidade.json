@@ -1,0 +1,18 @@
+{
+  "pecas_plastico": {
+    "quantidade_azul": 150,
+    "quantidade_branca": 205,
+    "quantidade_verde": 10,
+    "quantidade_vermelha": 70
+  },
+  "pecas_metais": {
+    "quantidade_ferro": 80,
+    "quantidade_aluminio": 120
+  },
+  "pecas_refugo": {
+  
+    "peças_perdidas": 18,
+    "quantidade_defeituosas": 22,
+    "total_refugo": 40
+  }
+}
