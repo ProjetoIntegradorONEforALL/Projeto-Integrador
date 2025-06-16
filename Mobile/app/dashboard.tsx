@@ -75,8 +75,8 @@ export default function Dashboard() {
           {/* Cards indicadores */}
           <View style={styles.cardContainer}>
             <View style={[styles.card, { backgroundColor: "#69B578" }]}>
-              <Text style={styles.cardTitle}>Reciclado Hoje</Text>
-              <Text style={styles.cardValue}>150 kg</Text>
+              <Text style={styles.cardTitle}>Separado Hoje</Text>
+              <Text style={styles.cardValue}>10 kg</Text>
             </View>
             <View style={[styles.card, { backgroundColor: "#A1C181" }]}>
               <Text style={styles.cardTitle}>Alertas Ativos</Text>
@@ -84,19 +84,19 @@ export default function Dashboard() {
             </View>
             <View style={[styles.card, { backgroundColor: "#FFB627" }]}>
               <Text style={styles.cardTitle}>Média Semanal</Text>
-              <Text style={styles.cardValue}>85 kg</Text>
+              <Text style={styles.cardValue}>14 kg</Text>
             </View>
           </View>
 
           <Text style={styles.sectionTitle}>
-            Produção Diária (Últimos 7 dias)
+            Separação Diária por Material (Últimos 7 dias)
           </Text>
           <LineChart
             data={{
               labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
               datasets: [
                 {
-                  data: [45, 60, 50, 80, 90, 70, 100],
+                  data: [20, 30, 25, 40, 50, 35, 45], // Exemplo: valores de separação por dia
                   strokeWidth: 2,
                 },
               ],
@@ -122,29 +122,15 @@ export default function Dashboard() {
             data={[
               {
                 name: "Plástico",
-                population: 40,
+                population: 60,
                 color: "#69B578",
                 legendFontColor: "#333",
                 legendFontSize: 14,
               },
               {
-                name: "Papel",
-                population: 25,
-                color: "#A1C181",
-                legendFontColor: "#333",
-                legendFontSize: 14,
-              },
-              {
                 name: "Metal",
-                population: 20,
+                population: 40,
                 color: "#FFB627",
-                legendFontColor: "#333",
-                legendFontSize: 14,
-              },
-              {
-                name: "Vidro",
-                population: 15,
-                color: "#E76F51",
                 legendFontColor: "#333",
                 legendFontSize: 14,
               },
@@ -250,15 +236,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
-  content: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 24,
-    color: "#000",
-  },
   sidebarContainer: {
     position: "absolute",
     left: 0,
@@ -274,5 +251,4 @@ const styles = StyleSheet.create({
     height: "100%",
     zIndex: 9,
   },
-
 });

@@ -1,3 +1,5 @@
+// /app/alertas.tsx
+
 import React, { useRef, useState } from "react";
 import {
   View,
@@ -12,7 +14,6 @@ import {
 } from "react-native";
 import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
-import { useTranslation } from "react-i18next";
 import { useNavigation, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Header from "../components/Header";
@@ -25,7 +26,6 @@ export const options = {
 };
 
 export default function Alertas() {
-  const { t } = useTranslation("alerts");
   const navigation = useNavigation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -56,24 +56,24 @@ export default function Alertas() {
   const alertas = [
     {
       id: 1,
-      titulo: t("highTemperature"),
-      descricao: t("sensor5HighTemp"),
+      titulo: "Falha no Motor da Esteira",
+      descricao: "Sensor 5 detectou interrupção no funcionamento da esteira principal.",
       status: "crítico",
-      data: "15/05/2025 09:24",
+      data: "15/06/2025 09:24",
     },
     {
       id: 2,
-      titulo: t("lowHumidity"),
-      descricao: t("sensor3LowHumidity"),
+      titulo: "Nível de Resíduos Acima do Normal",
+      descricao: "Sensor 3 indicou acúmulo excessivo na área de descarte.",
       status: "alerta",
-      data: "15/05/2025 08:50",
+      data: "15/06/2025 08:50",
     },
     {
       id: 3,
-      titulo: t("stableOperation"),
-      descricao: t("allSensorsNormal"),
+      titulo: "Funcionamento Estável",
+      descricao: "Todos os sensores estão operando normalmente.",
       status: "normal",
-      data: "15/05/2025 07:45",
+      data: "15/06/2025 07:45",
     },
   ];
 
@@ -82,7 +82,7 @@ export default function Alertas() {
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       <SafeAreaView style={styles.safeArea}>
-        <Header title={t("recentAlerts")} onMenuPress={toggleSidebar} />
+        <Header title="Alertas Recentes" onMenuPress={toggleSidebar} />
 
         <View style={styles.container}>
           <ScrollView style={styles.alertList} contentContainerStyle={{ paddingBottom: 100 }}>
@@ -197,5 +197,5 @@ const styles = StyleSheet.create({
     height: "100%",
     zIndex: 9,
   },
-
 });
+  

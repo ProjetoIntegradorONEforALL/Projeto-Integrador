@@ -1,5 +1,3 @@
-// /app/monitoramento.tsx
-
 import React, { useState, useRef } from "react";
 import {
   View,
@@ -11,7 +9,7 @@ import {
   Platform,
   SafeAreaView,
   StatusBar,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { LineChart, BarChart } from "react-native-chart-kit";
@@ -71,52 +69,73 @@ export default function Monitoramento() {
         >
           <Text style={styles.header}>Monitoramento</Text>
 
-          <Text style={styles.sectionTitle}>Temperatura por Hora</Text>
+          <Text style={styles.sectionTitle}>Separação por Tamanho (Kg)</Text>
           <LineChart
             data={{
-              labels: ["6h", "8h", "10h", "12h", "14h", "16h"],
+              labels: ["Baixo", "Médio", "Alto"],
               datasets: [
                 {
-                  data: [20, 22, 24, 23, 25, 21],
+                  data: [32, 50, 40], // plástico
+                  color: (opacity = 1) => `rgba(105, 181, 120, ${opacity})`,
                   strokeWidth: 2,
+                  label: "Plástico",
+                },
+                {
+                  data: [20, 35, 25], // metal
+                  color: (opacity = 1) => `rgba(255, 182, 39, ${opacity})`,
+                  strokeWidth: 2,
+                  label: "Metal",
                 },
               ],
+              legend: ["Plástico", "Metal"],
             }}
             width={screenWidth - 32}
             height={220}
             chartConfig={{
               backgroundGradientFrom: "#69B578",
               backgroundGradientTo: "#254D32",
-              decimalPlaces: 1,
+              decimalPlaces: 0,
               color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: () => "#fff",
+              style: {
+                borderRadius: 15,
+              },
+              propsForDots: {
+                r: "6",
+                strokeWidth: "2",
+                stroke: "#fff",
+              },
             }}
-            style={styles.chart}
             bezier
+            style={styles.chart}
           />
 
-          <Text style={styles.sectionTitle}>Consumo Energético (kWh)</Text>
+          <Text style={styles.sectionTitle}>Quantidade Separada Hoje (Kg)</Text>
           <BarChart
             data={{
-              labels: ["Seg", "Ter", "Qua", "Qui", "Sex"],
+              labels: ["Plástico Baixo", "Plástico Médio", "Plástico Alto", "Metal Baixo", "Metal Médio", "Metal Alto"],
               datasets: [
                 {
-                  data: [30, 45, 28, 80, 60],
+                  data: [10, 20, 30, 5, 10, 25],
                 },
               ],
             }}
             width={screenWidth - 32}
-            height={220}
+            height={250}
             yAxisLabel=""
-            yAxisSuffix=""
+            yAxisSuffix=" kg"
             chartConfig={{
               backgroundGradientFrom: "#A1C181",
               backgroundGradientTo: "#69B578",
               decimalPlaces: 0,
               color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
               labelColor: () => "#333",
+              style: {
+                borderRadius: 15,
+              },
             }}
             style={styles.chart}
+            verticalLabelRotation={60}
           />
         </ScrollView>
 
@@ -140,7 +159,6 @@ export default function Monitoramento() {
         >
           <Sidebar onNavigate={handleNavigate} onToggle={toggleSidebar} />
         </Animated.View>
-
       </SafeAreaView>
     </>
   );
