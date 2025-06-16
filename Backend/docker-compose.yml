@@ -1,42 +1,75 @@
-version: '3.8' # Versão da sintaxe do Docker Compose
+# version: '3.8' # Você pode remover esta linha para evitar o aviso "the attribute `version` is obsolete"
 
 services:
   # Serviço para o PostgreSQL
   db:
-    image: postgres:latest # Usa a última versão da imagem oficial do PostgreSQL
-    container_name: postgres_db_container # Nome do contêiner para fácil referência
-    restart: always # O contêiner sempre reinicia se parar
+    image: postgres:latest
+    container_name: postgres_db_container
+    restart: always
     environment:
-      POSTGRES_DB: myappdb # Nome do banco de dados inicial a ser criado (opcional)
-      POSTGRES_USER: myuser # Usuário do banco de dados (mude para algo diferente de 'postgres'!)
-      POSTGRES_PASSWORD: mysecretpassword # Senha do usuário (MUDE PARA UMA SENHA FORTE E ÚNICA!)
+      POSTGRES_DB: myappdb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mysecretpassword # MUDE PARA UMA SENHA FORTE E ÚNICA!
     ports:
-      - "5432:5432" # Mapeia a porta 5432 do host para a porta 5432 do contêiner
+      - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data # Persistência de dados para o PostgreSQL
+      - pgdata:/var/lib/postgresql/data
     networks:
-      - app_network # Conecta o DB à rede interna da aplicação
+      - app_network
 
   # Serviço para o pgAdmin
   pgadmin:
-    image: dpage/pgadmin4 # Imagem oficial do pgAdmin 4
-    container_name: pgadmin_container # Nome do contêiner para fácil referência
-    restart: always # O contêiner sempre reinicia se parar
+    image: dpage/pgadmin4
+    container_name: pgadmin_container
+    restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: g.eliezer.rodrigues@gmail.com # Email de login do pgAdmin (MUDE!)
-      PGADMIN_DEFAULT_PASSWORD: postgreesqlpass # Senha de login do pgAdmin (MUDE PARA OUTRA SENHA FORTE E ÚNICA!)
+      PGADMIN_DEFAULT_EMAIL: g.eliezer.rodrigues@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgreesqlpass # MUDE PARA UMA SENHA FORTE E ÚNICA!
     ports:
-      - "8081:80" # Mapeia a porta 8080 do host para a porta 80 do contêiner (pgAdmin web)
+      - "8081:80"
     networks:
-      - app_network # Conecta o pgAdmin à rede interna da aplicação
+      - app_network
     depends_on:
-      - db # Garante que o serviço 'db' inicie antes do 'pgadmin'
+      - db
+
+  # Serviço para o Redis
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    networks:
+      - app_network
+
+  # Sua Aplicação Flask com Chatbot
+  app:
+    build: . # ESTÁ CORRETO: O contexto de build é o diretório atual (Backend/) onde está o Dockerfile
+    container_name: flask_app_container
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgresql://myuser:mysecretpassword@db:5432/myappdb # MUDE USER/PASSWORD!
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      FLASK_ENV: development
+    volumes:
+      - .:/app # ESTÁ CORRETO: Mapeia o diretório atual (Backend/) do seu host para '/app' no contêiner
+    networks:
+      - app_network
+    depends_on:
+      - db
+      - redis
 
 # Volumes para persistência de dados
 volumes:
-  pgdata: # Este volume persistirá os dados do PostgreSQL
+  pgdata:
+  redisdata:
 
 # Redes
 networks:
-  app_network: # Define uma rede interna para os contêineres se comunicarem
+  app_network:
     driver: bridge
