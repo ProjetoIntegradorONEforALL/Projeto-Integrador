@@ -1,22 +1,24 @@
-# Usa uma imagem base do Python, adequada para sua versão
-FROM python:3.11-slim-buster
+# backend/Dockerfile
 
-# Define o diretório de trabalho dentro do contêiner
+# Escolha uma imagem base oficial do Node.js
+FROM node:18-alpine
+
+# Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copia o arquivo de requisitos e instala as dependências
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copia os arquivos package.json e package-lock.json para instalar as dependências
+COPY package*.json ./
 
-# Copia todo o código da sua aplicação para o diretório de trabalho
-COPY . . 
+# Instala as dependências do projeto
+RUN npm install
 
-# Expõe a porta que o Flask vai usar
-EXPOSE 5000
+# Copia todo o restante do código da aplicação para o diretório de trabalho
+COPY . .
 
-# Define o comando para iniciar a aplicação Flask
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=5000
+# Expõe a porta que sua aplicação Node.js escutará (a mesma que você mapeou no docker-compose.yml)
+EXPOSE 3001
 
-CMD ["flask", "run"]
+# Define o comando para iniciar sua aplicação
+# Se você usa nodemon para desenvolvimento, pode ser algo como: CMD ["npm", "run", "dev"]
+# Ou para produção: CMD ["node", "src/index.js"] (ajuste para o seu arquivo de entrada)
+CMD ["npm", "start"] # Ou o comando que inicia seu backend

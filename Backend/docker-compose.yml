@@ -1,7 +1,4 @@
-# version: '3.8' # Você pode remover esta linha para evitar o aviso "the attribute `version` is obsolete"
-
 services:
-  # Serviço para o PostgreSQL
   db:
     image: postgres:latest
     container_name: postgres_db_container
@@ -9,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: myappdb
       POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mysecretpassword # MUDE PARA UMA SENHA FORTE E ÚNICA!
+      POSTGRES_PASSWORD: mysecretpassword
     ports:
       - "5432:5432"
     volumes:
@@ -17,14 +14,13 @@ services:
     networks:
       - app_network
 
-  # Serviço para o pgAdmin
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin_container
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: g.eliezer.rodrigues@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: postgreesqlpass # MUDE PARA UMA SENHA FORTE E ÚNICA!
+      PGADMIN_DEFAULT_PASSWORD: postgreesqlpass
     ports:
       - "8081:80"
     networks:
@@ -32,7 +28,6 @@ services:
     depends_on:
       - db
 
-  # Serviço para o Redis
   redis:
     image: redis:latest
     container_name: redis_container
@@ -44,32 +39,58 @@ services:
     networks:
       - app_network
 
-  # Sua Aplicação Flask com Chatbot
-  app:
-    build: . # ESTÁ CORRETO: O contexto de build é o diretório atual (Backend/) onde está o Dockerfile
+  node_back:
+    build:
+      context: . # Corrigido: O Node.js Dockerfile e código estão na mesma pasta do docker-compose.yml
+      dockerfile: Dockerfile
+    container_name: nodejs_backend_container
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: development
+      DB_HOST: db
+      DB_USER: myuser
+      DB_PASSWORD: mysecretpassword
+      DB_NAME: myappdb
+      DB_PORT: 5432
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      FLASK_CHATBOT_URL: http://chatbot:5000
+    volumes:
+      - .:/app # Corrigido: Mapeia a pasta atual (Backend) para dentro do contêiner
+    networks:
+      - app_network
+    depends_on:
+      - db
+      - redis
+      - chatbot
+      
+  chatbot:
+    build:
+      context: ./chatbot_docker # Corrigido: O chatbot Dockerfile e código estão na subpasta chatbot_docker
+      dockerfile: Dockerfile
     container_name: flask_app_container
     restart: always
     ports:
       - "5000:5000"
     environment:
-      DATABASE_URL: postgresql://myuser:mysecretpassword@db:5432/myappdb # MUDE USER/PASSWORD!
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://myuser:mysecretpassword@db:5432/myappdb
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      FLASK_ENV: development
     volumes:
-      - .:/app # ESTÁ CORRETO: Mapeia o diretório atual (Backend/) do seu host para '/app' no contêiner
+      - ./chatbot_docker:/app # Corrigido: Mapeia a subpasta chatbot_docker para dentro do contêiner
     networks:
       - app_network
     depends_on:
       - db
       - redis
 
-# Volumes para persistência de dados
 volumes:
   pgdata:
   redisdata:
 
-# Redes
 networks:
   app_network:
     driver: bridge
