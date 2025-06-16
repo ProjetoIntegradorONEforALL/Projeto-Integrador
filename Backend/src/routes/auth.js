@@ -7,9 +7,6 @@ router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // TODO: Implement proper user authentication
-    // This is a placeholder for demonstration
-    
     if (username !== 'admin' || password !== 'admin123') {
       return res.status(401).json({
         status: 'error',
@@ -70,4 +67,4 @@ router.get('/verify', async (req, res) => {
   }
 });
 
-module.exports = router; 
+module.exports = router;

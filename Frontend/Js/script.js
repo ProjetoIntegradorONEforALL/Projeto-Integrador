@@ -1,80 +1,71 @@
-   const eficienciaElement = document.getElementById("eficiencia");
-    const errosElement = document.getElementById("erros");
-    const materiaisElement = document.getElementById("materiais");
+const eficienciaElement = document.getElementById("eficiencia");
+const errosElement = document.getElementById("erros");
+const materiaisElement = document.getElementById("materiais");
 
-    const eficienciaChart = new Chart(document.getElementById("eficienciaChart"), {
+fetch('http://localhost:3000/api/v1/dashboard')
+  .then(res => res.json())
+  .then(data => {
+    eficienciaElement.textContent = data.quantidade_por_tempo + '%';
+    errosElement.textContent = data.quantidade_erros;
+    materiaisElement.textContent = data.materiais_processados;
+
+    // Gráfico de produção por tempo (barra)
+    new Chart(document.getElementById('eficienciaChart'), {
       type: 'bar',
       data: {
-        labels: ["Jan", "Fev", "Mar", "Abr", "Mai"],
+        labels: data.grafico_qtd_tempo.map(p => p.mes),
         datasets: [{
-          label: "Quantidade por tempo:",
-          data: [85, 90, 92, 94, 93],
-          borderColor: "#2e7d32",
-          backgroundColor: "rgba(46,125,50,0.1)",
-          fill: true,
-          tension: 0.4
+          label: 'Produção',
+          data: data.grafico_qtd_tempo.map(p => p.valor),
+          backgroundColor: '#76c7c0'
         }]
       },
       options: {
         responsive: true,
-        scales: {
-          y: { min: 80, max: 100 }
-        }
+        plugins: { legend: { display: false } }
       }
     });
 
-    const errosChart = new Chart(document.getElementById("errosChart"), {
+    // Gráfico de erros (linha)
+    new Chart(document.getElementById('errosChart'), {
       type: 'line',
       data: {
-        labels: ["Jan", "Fev", "Mar", "Abr", "Mai"],
+        labels: data.grafico_erros.map(e => e.mes),
         datasets: [{
-          label: "Erros",
-          data: [8, 6, 4, 5, 3],
-          backgroundColor: "#e53935"
+          label: 'Erros',
+          data: data.grafico_erros.map(e => e.valor),
+          borderColor: '#e74c3c',
+          backgroundColor: 'transparent',
+          pointBackgroundColor: '#e74c3c',
+          tension: 0.3
         }]
       },
       options: {
         responsive: true,
-        scales: {
-          y: { beginAtZero: true }
-        }
+        plugins: { legend: { display: false } }
       }
     });
 
-    const materiaisChart = new Chart(document.getElementById("materiaisChart"), {
+    // Gráfico de materiais processados (barra horizontal)
+    new Chart(document.getElementById('materiaisChart'), {
       type: 'bar',
       data: {
-        labels: ["Plástico", "Metal"],
+        labels: data.grafico_materiais.map(m => m.tipo),
         datasets: [{
-          label: "qntd.",
-          data: [600, 500],
-          backgroundColor: ["#42a5f5", "#66bb6a"]
+          label: 'Quantidade',
+          data: data.grafico_materiais.map(m => m.valor),
+          backgroundColor: ['#3498db', '#2ecc71']
         }]
       },
       options: {
-        responsive: true
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display: false } }
       }
     });
+  })
+  .catch(err => console.error('Erro ao carregar dados:', err));
 
-    function atualizarDashboard() {
-      const novaEf = (90 + Math.random() * 10).toFixed(1);
-      const novosErros = Math.floor(Math.random() * 10);
-      const novosMateriais = (1300 + Math.random() * 200).toFixed(0);
-
-      eficienciaElement.textContent = `${novaEf}`;
-      errosElement.textContent = novosErros;
-      materiaisElement.textContent = `${novosMateriais} qtd`;
-
-
-      materiaisChart.data.datasets[0].data = [
-        Math.floor(Math.random() * 800),
-        Math.floor(Math.random() * 600),
-        Math.floor(Math.random() * 300)
-      ];
-      materiaisChart.update();
-    }
-
-    setInterval(atualizarDashboard, 5000);
 
   function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('collapsed');
@@ -83,7 +74,7 @@
   function confirmLogout(event) {
     event.preventDefault();
     if (confirm("Tem certeza que deseja sair?")) {
-      window.location.href = "http://127.0.0.1:5501/Frontend/Pages/Login.html";
+      window.location.href = "Login.html";
     }
   }
 

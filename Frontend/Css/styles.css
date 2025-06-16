@@ -5,25 +5,27 @@
   overflow: hidden;
 }
 
+/* Sidebar geral */
 #sidebar {
-  background-color: #b0b0b0;
-  width: 250px;
-  transition: width 0.3s ease;
+  background-color: #2c3e50;
+  width: 240px;
+  min-height: 100vh;
   padding: 1rem;
-  box-sizing: border-box;
+  position: relative;
+  transition: width 0.3s ease;
+  color: #fff;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 #sidebar.collapsed {
-  width: 70px;
+  width: 75px;
 }
 
 #sidebar .brand {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #333;
+  color: #ecf0f1;
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -31,7 +33,7 @@
 .side-menu {
   list-style: none;
   padding: 0;
-  flex-grow: 1;
+  margin: 0;
 }
 
 .side-menu li {
@@ -41,34 +43,45 @@
 .side-menu a {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  background: white;
-  padding: 10px 14px;
+  padding: 10px 12px;
   border-radius: 8px;
-  color: #333;
   text-decoration: none;
+  background-color: #34495e;
+  color: #ecf0f1;
   font-weight: 500;
-  transition: background 0.2s ease;
+  transition: background 0.2s, color 0.2s;
 }
 
 .side-menu a:hover {
-  background-color: #e0e0e0;
+  background-color: #3e5e75;
+  color: #ffffff;
 }
 
+.side-menu i {
+  font-size: 1.3rem;
+  margin-right: 10px;
+}
+
+/* Ocultar texto ao colapsar */
 #sidebar.collapsed .text {
   display: none;
 }
 
+#sidebar.collapsed .brand {
+  display: none;
+}
 /* Toggle botão */
 #toggle-btn {
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  padding: 5px;
   position: absolute;
-  top: 15px;
+  top: 10px;
   right: -15px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 7px;
+  border-radius: 25%;
   cursor: pointer;
+  transition: transform 0.3s ease;
+  color: black;
 }
 
 #sidebar.collapsed #toggle-btn i {
@@ -85,6 +98,7 @@ main.content {
   padding: 1.5rem;
   background: #f8f9fa;
   overflow-y: auto;
+  text-align: center;
 }
 
 .chart-section {
@@ -134,4 +148,24 @@ main.content {
   font-size: 1.5rem;
   color: #00796b;
   font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 60px;
+    padding: 10px 5px;
+  }
+
+  #sidebar .text {
+    display: none;
+  }
+
+  #sidebar .brand {
+    display: none;
+  }
+
+  main.content {
+    padding: 10px;
+  }
 }
