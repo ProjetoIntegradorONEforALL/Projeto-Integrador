@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font);
+}
+
+body {
+  background: var(--bg);
+  display: flex;
+}
+/* Sidebar geral */
+#sidebar {
+  background-color: #2c3e50;
+  width: 240px;
+  min-height: 100vh;
+  padding: 1rem;
+  position: relative;
+  transition: width 0.3s ease;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar.collapsed {
+  width: 75px;
+}
+
+#sidebar .brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ecf0f1;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.side-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu li {
+  margin-bottom: 1rem;
+}
+
+.side-menu a {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  background-color: #34495e;
+  color: #ecf0f1;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.side-menu a:hover {
+  background-color: #3e5e75;
+  color: #ffffff;
+}
+
+.side-menu i {
+  font-size: 1.3rem;
+  margin-right: 10px;
+}
+
+/* Ocultar texto ao colapsar */
+#sidebar.collapsed .text {
+  display: none;
+}
+
+#sidebar.collapsed .brand {
+  display: none;
+}
+
+/* Toggle Button */
+#toggle-btn {
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 7px;
+  border-radius: 25%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  color: black;
+}
+
+#sidebar.collapsed #toggle-btn i {
+  transform: rotate(180deg);
+}
+
+/* Conteúdo principal */
+/* Centraliza o conteúdo principal */
+#content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Cards de status em linha e centralizados */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+/* Estilização dos cards */
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Gráficos lado a lado e centralizados */
+.charts {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Caixa individual de cada gráfico */
+.chart-box {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  width: 360px;
+}
+    
+canvas{max-width:100%}
+
+.logout-btn {
+  background-color: #dc3545; /* vermelho bootstrap */
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.logout-btn:hover {
+  background-color: #bb2d3b; /* vermelho escuro ao passar o mouse */
+  color: white;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 60px;
+    padding: 10px 5px;
+  }
+
+  #sidebar .text {
+    display: none;
+  }
+
+  #sidebar .brand {
+    display: none;
+  }
+  main.content {
+    font-size: 1px;
+    padding: 10px;
+  }
+  .chart-box {
+    flex: 1 1 100%;
+    width: 100px;
+    margin-bottom: 20px;
+  }
+  .min-font {
+    display: none;
+  }
+}
+
+

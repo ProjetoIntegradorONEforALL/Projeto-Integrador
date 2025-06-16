@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ChatBot</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/Frontend/Css/chatbot.css">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+    <aside id="sidebar" class="expanded">
+      <div class="brand">EcoVision</div>
+      <ul class="side-menu top">
+        <li><a href="dashboard.html"><i class='bx bxs-dashboard'></i><span class="text">Dashboard</span></a></li>
+        <li><a href="monitoramento.html"><i class='bx bxs-cog'></i><span class="text">Monitoramento</span></a></li>
+        <li><a href="chatbot.html"><i class='bx bxs-bot'></i><span class="text">ChatBot</span></a></li>
+        <li><a href="login.html" onclick="confirmLogout(event)" class="logout-btn"><i class='bx bxs-log-out'></i><span class="text">Sair</span></a></li>
+      </ul>
+      <div id="toggle-btn" onclick="toggleSidebar()">
+        <i class='bx bx-chevron-left'></i>
+      </div>
+    </aside>
+
+    
+      <!-- Conteúdo -->
+      <main id="mainContent">
+        <h2>Chat Bot</h2>
+        <div class="chat-container">
+          <div id="chat-resposta" class="chat-box"></div>
+          <form id="chat-form" class="chat-form">
+            <input id="user-input" type="text" placeholder="Digite sua mensagem..." />
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
+      </main>
+    </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../Js/chatbot.js"></script>
+</body>
+</html>

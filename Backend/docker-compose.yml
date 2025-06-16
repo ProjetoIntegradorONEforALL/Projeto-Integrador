@@ -1,0 +1,96 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_db_container
+    restart: always
+    environment:
+      POSTGRES_DB: myappdb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: g.eliezer.rodrigues@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: postgreesqlpass
+    ports:
+      - "8081:80"
+    networks:
+      - app_network
+    depends_on:
+      - db
+
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    networks:
+      - app_network
+
+  node_back:
+    build:
+      context: . # Corrigido: O Node.js Dockerfile e código estão na mesma pasta do docker-compose.yml
+      dockerfile: Dockerfile
+    container_name: nodejs_backend_container
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DB_HOST: db
+      DB_USER: myuser
+      DB_PASSWORD: mysecretpassword
+      DB_NAME: myappdb
+      DB_PORT: 5432
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      FLASK_CHATBOT_URL: http://chatbot:5000
+    volumes:
+      - .:/app # Corrigido: Mapeia a pasta atual (Backend) para dentro do contêiner
+    networks:
+      - app_network
+    depends_on:
+      - db
+      - redis
+      - chatbot
+      
+  chatbot:
+    build:
+      context: ./chatbot_docker # Corrigido: O chatbot Dockerfile e código estão na subpasta chatbot_docker
+      dockerfile: Dockerfile
+    container_name: flask_app_container
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://myuser:mysecretpassword@db:5432/myappdb
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - ./chatbot_docker:/app # Corrigido: Mapeia a subpasta chatbot_docker para dentro do contêiner
+    networks:
+      - app_network
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  pgdata:
+  redisdata:
+
+networks:
+  app_network:
+    driver: bridge
