@@ -82,10 +82,11 @@ body {
   right: -15px;
   background-color: #ffffff;
   border: 1px solid #ccc;
-  border-radius: 50%;
-  padding: 5px;
+  padding: 7px;
+  border-radius: 25%;
   cursor: pointer;
   transition: transform 0.3s ease;
+  color: black;
 }
 
 #sidebar.collapsed #toggle-btn i {
