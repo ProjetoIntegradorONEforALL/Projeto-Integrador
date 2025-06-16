@@ -46,7 +46,7 @@ services:
     container_name: nodejs_backend_container
     restart: always
     ports:
-      - "3001:3001"
+      - "3000:3000"
     environment:
       NODE_ENV: development
       DB_HOST: db

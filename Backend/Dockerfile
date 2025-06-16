@@ -16,9 +16,9 @@ RUN npm install
 COPY . .
 
 # Expõe a porta que sua aplicação Node.js escutará (a mesma que você mapeou no docker-compose.yml)
-EXPOSE 3001
+EXPOSE 3000
 
 # Define o comando para iniciar sua aplicação
 # Se você usa nodemon para desenvolvimento, pode ser algo como: CMD ["npm", "run", "dev"]
 # Ou para produção: CMD ["node", "src/index.js"] (ajuste para o seu arquivo de entrada)
-CMD ["npm", "start"] # Ou o comando que inicia seu backend
+CMD ["npm", "start"]
