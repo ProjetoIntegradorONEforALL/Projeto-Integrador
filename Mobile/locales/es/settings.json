@@ -1,0 +1,10 @@
+{
+  "settings": "Configuración",
+  "edit_profile": "Editar Perfil",
+  "notifications": "Notificaciones",
+  "language": "Idioma",
+  "about": "Acerca de la App",
+  "logout": "Cerrar sesión",
+  "logout_success": "Has cerrado sesión exitosamente.",
+  "version": "Versión 1.0 - Desarrollado por Melina, Millena y Pablo"
+}

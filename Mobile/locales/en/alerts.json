@@ -1,0 +1,9 @@
+{
+  "recentAlerts": "Recent Alerts",
+  "highTemperature": "High Temperature",
+  "sensor5HighTemp": "Sensor 5 detected temperature above normal.",
+  "lowHumidity": "Low Humidity",
+  "sensor3LowHumidity": "Sensor 3 is below humidity limit.",
+  "stableOperation": "Stable Operation",
+  "allSensorsNormal": "All sensors are operating normally."
+}
