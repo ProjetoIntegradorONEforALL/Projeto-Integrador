@@ -6,8 +6,8 @@
     "quantidade_vermelha": 70
   },
   "pecas_metais": {
-    "quantidade_ferro": 80,
-    "quantidade_aluminio": 120
+    "quantidade_ferro": 100,
+    "quantidade_aluminio": 50
   },
   "pecas_refugo": {
   

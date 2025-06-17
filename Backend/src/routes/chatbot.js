@@ -4,7 +4,7 @@ const axios = require('axios');
 
 router.post('/', async (req, res) => {
   try {
-    const flaskResponse = await axios.post('http://localhost:5000/api/chatbot', {
+    const flaskResponse = await axios.post('http://flask_app_container:5000/api/chatbot', {
       mensagem: req.body.mensagem
     });
 
