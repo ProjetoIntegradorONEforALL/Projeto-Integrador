@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth');
+// const auth = require('../middleware/auth'); // Se não quiser autenticação no teste
 const cache = require('../services/cache');
 
+
+
 // Receive data from Postman/Node-RED
-router.post('/receive', auth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    const data = req.body; // Dados JSON enviados via Postman
+    const data = req.body; // Dados JSON enviados via Postman/Node-RED
     console.log('Dados recebidos:', data);
 
     // Armazenar no cache (ex.: por 5 minutos)

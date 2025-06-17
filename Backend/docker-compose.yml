@@ -41,7 +41,7 @@ services:
 
   node_back:
     build:
-      context: . # Corrigido: O Node.js Dockerfile e código estão na mesma pasta do docker-compose.yml
+      context: .
       dockerfile: Dockerfile
     container_name: nodejs_backend_container
     restart: always
@@ -54,21 +54,22 @@ services:
       DB_PASSWORD: mysecretpassword
       DB_NAME: myappdb
       DB_PORT: 5432
+      PORT: 3000
       REDIS_HOST: redis
       REDIS_PORT: 6379
       FLASK_CHATBOT_URL: http://chatbot:5000
     volumes:
-      - .:/app # Corrigido: Mapeia a pasta atual (Backend) para dentro do contêiner
+      - .:/app
     networks:
       - app_network
     depends_on:
       - db
       - redis
       - chatbot
-      
+
   chatbot:
     build:
-      context: ./chatbot_docker # Corrigido: O chatbot Dockerfile e código estão na subpasta chatbot_docker
+      context: ./chatbot_docker
       dockerfile: Dockerfile
     container_name: flask_app_container
     restart: always
@@ -80,16 +81,28 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
     volumes:
-      - ./chatbot_docker:/app # Corrigido: Mapeia a subpasta chatbot_docker para dentro do contêiner
+      - ./chatbot_docker:/app
     networks:
       - app_network
     depends_on:
       - db
       - redis
 
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered_container
+    restart: always
+    ports:
+      - "1880:1880"
+    volumes:
+      - nodered_data:/data
+    networks:
+      - app_network
+
 volumes:
   pgdata:
   redisdata:
+  nodered_data:
 
 networks:
   app_network:
