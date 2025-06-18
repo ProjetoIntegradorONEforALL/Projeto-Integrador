@@ -19,6 +19,7 @@ import { useNavigation, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Header from "../components/Header";
 import Sidebar from "../components/SideBar";
+import { sendMessageToChatbot } from "./services/chatbotService";
 
 const { width } = Dimensions.get("window");
 
@@ -56,18 +57,29 @@ export default function ChatBot() {
   ]);
   const [input, setInput] = useState("");
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (input.trim() === "") return;
 
     const newMessage = { id: Date.now(), text: input, sender: "user" };
-    const botResponse = {
-      id: Date.now() + 1,
-      text: "Entendi! Vou analisar sua solicitação.",
-      sender: "bot",
-    };
-
-    setMessages((prev) => [...prev, newMessage, botResponse]);
+    setMessages((prev) => [...prev, newMessage]);
     setInput("");
+
+    try {
+      const botReply = await sendMessageToChatbot(input);
+      const botResponse = {
+        id: Date.now() + 1,
+        text: botReply,
+        sender: "bot",
+      };
+      setMessages((prev) => [...prev, botResponse]);
+    } catch (error) {
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: "Erro ao conectar com o assistente. Verifique sua conexão.",
+        sender: "bot",
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    }
   };
 
   if (!fontsLoaded) return null;
@@ -83,7 +95,10 @@ export default function ChatBot() {
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : undefined}
         >
-          <ScrollView style={styles.chatBox} contentContainerStyle={{ paddingBottom: 100 }}>
+          <ScrollView
+            style={styles.chatBox}
+            contentContainerStyle={{ paddingBottom: 100 }}
+          >
             {messages.map((msg) => (
               <View
                 key={msg.id}
@@ -138,7 +153,6 @@ export default function ChatBot() {
         >
           <Sidebar onNavigate={handleNavigate} onToggle={toggleSidebar} />
         </Animated.View>
-
       </SafeAreaView>
     </>
   );
