@@ -3,10 +3,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # 1. Carregar os dados
-df = pd.read_csv('dados_processamento.csv')  # ou pd.read_sql se vier do banco
+df = pd.read_sql('dados_processamento.sql')
 
 # 2. Criar métricas úteis
+
+#quanto material foi processado por minuto
 df['eficiencia'] = df['volume_processado'] / df['tempo_operacao_min']
+#percentual de erros por unidade de material
 df['taxa_erro'] = df['erros'] / df['volume_processado']
 
 # 3. Análise de padrão por tipo de material
