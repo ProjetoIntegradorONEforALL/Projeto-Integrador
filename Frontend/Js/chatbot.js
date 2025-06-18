@@ -8,7 +8,7 @@ document.getElementById('chat-form').addEventListener('submit', async function (
   addMessage('user', mensagem);
 
   try {
-    const res = await fetch('http://localhost:3000/api/v1/chatbot', {
+    const res = await fetch('http://52.20.151.92:3000/api/v1/chatbot', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ mensagem })
@@ -46,6 +46,6 @@ function toggleSidebar() {
 function confirmLogout(event) {
     event.preventDefault();
     if (confirm("Tem certeza que deseja sair?")) {
-      window.location.href = "http://127.0.0.1:5501/Frontend/Pages/Login.html";
+      window.location.href = "/Frontend/Pages/Login.html";
     }
   }
