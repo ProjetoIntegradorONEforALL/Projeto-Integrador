@@ -20,6 +20,8 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
       }
   
       const data = await response.json();
+
+      console.log("Resposta do servidor:", data);
   
       if (response.ok) {
         localStorage.setItem("token", data.data.token); // Corrigido para data.data.token
