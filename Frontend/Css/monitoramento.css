@@ -99,8 +99,11 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  text-align: center;
+  text-align: center; /* Remove ou ajuste se não quiser todo o conteúdo centralizado */
+  flex-grow: 1; /* Permite que o conteúdo principal ocupe o espaço restante */
+  overflow-y: auto; /* Adicionado para permitir scroll se o conteúdo for maior que a tela */
 }
+
 
 /* Cards de status em linha e centralizados */
 .cards {
@@ -139,9 +142,27 @@ body {
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
   width: 360px;
+
+  /* --- Adições para controlar a altura do contêiner do gráfico --- */
+  height: 300px; /* Define a altura fixa para os contêineres dos gráficos */
+  /* Se preferir uma altura que se ajuste até um máximo, use: */
+  /* max-height: 400px; */
+  position: relative; /* Importante para que Chart.js responda corretamente */
+  /* --- Fim das Adições --- */
 }
-    
-canvas{max-width:100%}
+
+/* Regra específica para o elemento canvas DENTRO de .chart-box */
+/* Isso garante que o canvas preencha o contêiner .chart-box */
+.chart-box canvas {
+    display: block; /* Remove qualquer espaço extra abaixo do canvas */
+    /* Use !important para garantir que essas regras sobrescrevam estilos padrão se necessário */
+    width: 100% !important; /* Faz o canvas preencher 100% da largura do contêiner */
+    height: 100% !important; /* Faz o canvas preencher 100% da altura do contêiner */
+}
+
+/* Remova ou comente esta regra geral de canvas se a regra acima for suficiente */
+/* canvas{max-width:100%} */
+
 
 .logout-btn {
   background-color: #dc3545; /* vermelho bootstrap */
@@ -175,18 +196,27 @@ canvas{max-width:100%}
   #sidebar .brand {
     display: none;
   }
-  main.content {
-    font-size: 1px;
+  /* Ajuste o padding do conteúdo principal */
+  #content {
     padding: 10px;
+    /* Remova o text-align: center se não quiser tudo centralizado em mobile */
+    text-align: left;
   }
+
   .chart-box {
-    flex: 1 1 100%;
-    width: 100px;
+    flex: 1 1 100%; /* Permite que o chart-box ocupe 100% da largura disponível */
+    width: 100%; /* Garante que a largura seja 100% em telas pequenas */
+    height: 250px; /* Ajuste a altura para telas menores, se necessário */
     margin-bottom: 20px;
   }
+  /* Pode precisar ajustar a fonte ou ocultar elementos menores */
+  /*
   .min-font {
-    display: none;
+    font-size: 0.8rem;
   }
+   */
+   /* Se min-font era para ocultar, mantenha o display: none */
+   .min-font {
+     display: none;
+   }
 }
-
-
