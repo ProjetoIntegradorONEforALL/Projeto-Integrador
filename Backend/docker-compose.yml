@@ -1,4 +1,8 @@
+# docker-compose.yml (Versão com banco local para chatbot e conexão RDS para backend)
+version: '3.8'
+
 services:
+  # SERVIÇO DE BANCO DE DADOS LOCAL (PARA O CHATBOT)
   db:
     image: postgres:latest
     container_name: postgres_db_container
@@ -8,6 +12,7 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mysecretpassword
     ports:
+      # Manter esta porta mapeada se precisar acessar o banco local de fora dos containers (ex: com DBeaver)
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -15,6 +20,8 @@ services:
       - app_network
 
   pgadmin:
+    # Serviço pgAdmin - pode ser usado para acessar o banco local 'db' (configurado na interface)
+    # E pode ser usado para acessar o SEU RDS na AWS (configurado na interface)
     image: dpage/pgadmin4
     container_name: pgadmin_container
     restart: always
@@ -26,9 +33,10 @@ services:
     networks:
       - app_network
     depends_on:
-      - db
+      - db # pgAdmin depende do serviço db local para iniciar
 
   redis:
+    # Serviço Redis - para comunicação entre serviços (não depende do banco)
     image: redis:latest
     container_name: redis_container
     restart: always
@@ -39,36 +47,44 @@ services:
     networks:
       - app_network
 
+  # SERVIÇO DO SEU BACKEND NODE.JS (CONECTANDO AO RDS NA AWS)
   node_back:
     build:
-      context: . # Corrigido: O Node.js Dockerfile e código estão na mesma pasta do docker-compose.yml
+      context: .
       dockerfile: Dockerfile
     container_name: nodejs_backend_container
     restart: always
     ports:
-      - "3000:3000"
+      - "${PORT}:${PORT}" # Continua usando a PORT do .env
+
+    # ESTA É A PARTE CRUCIAL PARA CONECTAR AO RDS:
+    # Carrega TODAS as variáveis do seu arquivo .env (incluindo DB_*)
+    env_file:
+      - .env
+
     environment:
-      NODE_ENV: development
-      DB_HOST: db
-      DB_USER: myuser
-      DB_PASSWORD: mysecretpassword
-      DB_NAME: myappdb
-      DB_PORT: 5432
-      REDIS_HOST: redis
+      # Remova as variáveis DB_* daqui, pois agora elas vêm do .env (RDS)
+      # Remova também NODE_ENV e PORT, pois já vêm do .env e são as mesmas
+      REDIS_HOST: redis # Mantenha variáveis específicas para comunicação INTERNA (Redis, Chatbot)
       REDIS_PORT: 6379
       FLASK_CHATBOT_URL: http://chatbot:5000
+      # Variáveis DB_*, NODE_ENV, PORT REMOVIDAS para não sobrepor as do .env
     volumes:
-      - .:/app # Corrigido: Mapeia a pasta atual (Backend) para dentro do contêiner
+      - .:/app
     networks:
       - app_network
     depends_on:
-      - db
+      # Mantenha depends_on se o seu backend depender de Redis e Chatbot iniciarem primeiro.
+      # Não precisa mais depender do 'db' local para a conexão principal,
+      # mas pode depender dele se interagir com o chatbot que depende do 'db'.
       - redis
       - chatbot
-      
+      # - db # Dependência do 'db' local pode ser removida ou mantida dependendo da interação com o chatbot
+
+  # SERVIÇO DO CHATBOT FLASK (CONECTANDO AO BANCO LOCAL 'db')
   chatbot:
     build:
-      context: ./chatbot_docker # Corrigido: O chatbot Dockerfile e código estão na subpasta chatbot_docker
+      context: ./chatbot_docker
       dockerfile: Dockerfile
     container_name: flask_app_container
     restart: always
@@ -76,20 +92,35 @@ services:
       - "5000:5000"
     environment:
       FLASK_ENV: development
+      # ESTA LINHA GARANTE QUE O CHATBOT CONECTA AO BANCO LOCAL 'db':
       DATABASE_URL: postgresql://myuser:mysecretpassword@db:5432/myappdb
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      # As variáveis DB_* do .env NÃO são carregadas aqui, ele usa a DATABASE_URL local.
     volumes:
-      - ./chatbot_docker:/app # Corrigido: Mapeia a subpasta chatbot_docker para dentro do contêiner
+      - ./chatbot_docker:/app
     networks:
       - app_network
     depends_on:
-      - db
-      - redis
+      - db # O chatbot depende do banco local 'db'
+      - redis # O chatbot depende do redis
+
+  nodered:
+    # Serviço Node-RED (não depende do banco)
+    image: nodered/node-red:latest
+    container_name: nodered_container
+    restart: always
+    ports:
+      - "1880:1880"
+    volumes:
+      - nodered_data:/data
+    networks:
+      - app_network
 
 volumes:
-  pgdata:
+  pgdata: # Mantido o volume para o banco local 'db'
   redisdata:
+  nodered_data:
 
 networks:
   app_network:

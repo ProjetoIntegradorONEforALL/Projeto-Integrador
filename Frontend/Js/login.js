@@ -5,7 +5,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     const password = document.getElementById("password").value;
   
     try {
-      const response = await fetch("http://localhost:3000/api/v1/auth/login", {
+      const response = await fetch("http://52.20.151.92:3000/api/v1/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
@@ -20,6 +20,8 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
       }
   
       const data = await response.json();
+
+      console.log("Resposta do servidor:", data);
   
       if (response.ok) {
         localStorage.setItem("token", data.data.token); // Corrigido para data.data.token

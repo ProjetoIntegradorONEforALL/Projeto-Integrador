@@ -1,0 +1,31 @@
+-- Tabela: Peças
+CREATE TABLE pecas (
+    id_peca SERIAL PRIMARY KEY,
+    tipo VARCHAR(50)
+);
+
+-- Tabela: Erros
+CREATE TABLE erros (
+    id_erro SERIAL PRIMARY KEY,
+    tipo VARCHAR(100),
+    quantidade_erros INTEGER
+);
+
+-- Tabela: Processos
+CREATE TABLE processos (
+    id_processo SERIAL PRIMARY KEY,
+    id_peca INTEGER REFERENCES pecas(id_peca),
+    inicio_processo TIMESTAMP,
+    fim_processo TIMESTAMP,
+    quantidade INTEGER,
+    tempo_medio INTERVAL,
+    data_hora TIMESTAMP
+);
+
+-- Tabela associativa: Processo_Erro (relaciona erros com processos)
+CREATE TABLE processo_erro (
+    id_processo INTEGER REFERENCES processos(id_processo),
+    id_erro INTEGER REFERENCES erros(id_erro),
+    data_hora_erro TIMESTAMP,
+    PRIMARY KEY (id_processo, id_erro, data_hora_erro)
+);
